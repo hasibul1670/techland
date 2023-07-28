@@ -1,4 +1,5 @@
-import { IProduct } from './product.interface';
+import { buildWhereConditions } from '../../../helpers/buildWhereCondition';
+import { IProduct, IProductFilters } from './product.interface';
 import { Product } from './product.model';
 
 const createProduct = async (payload: IProduct): Promise<IProduct> => {
@@ -6,8 +7,10 @@ const createProduct = async (payload: IProduct): Promise<IProduct> => {
   return result;
 };
 
-const getAllProducts = async () => {
-  const result = await Product.find();
+const getAllProducts = async (filters: IProductFilters) => {
+  const { searchTerm, ...filtersData } = filters;
+  const { whereConditions } = buildWhereConditions(searchTerm, filtersData);
+  const result = await Product.find(whereConditions);
   return result;
 };
 

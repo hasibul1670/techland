@@ -3,8 +3,9 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import catchAsync from '../../../shared/catchAsync';
 import sendReponse from '../../../shared/sendResponse';
-import { IProduct } from './product.interface';
+import { IProduct, productFilterableFields } from './product.interface';
 import { ProductService } from './product.services';
+import pick from '../../../shared/pick';
 
 const sendProductResponse = (res: Response, message: string, data: any) => {
   sendReponse<IProduct>(res, {
@@ -22,9 +23,14 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllProducts = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProductService.getAllProducts();
-  sendProductResponse(res, 'Products retrieved successfully !', result);
+  const filters = pick(req.query, productFilterableFields);
+  const result = await ProductService.getAllProducts(filters);
+
+
+
+  sendProductResponse(res, 'Product is Created Successfully!', result);
 });
+
 
 const deleteProduct = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;

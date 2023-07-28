@@ -14,6 +14,13 @@ export type IProduct = {
 
 export type ProductModel = Model<IProduct>;
 
-export type IproductFilters = {
+export type IProductFilters = {
   searchTerm?: string;
+  name?: string;
+  category?: string;
 };
+
+
+export const productFilterableFields = ['searchTerm', 'name', 'category', ''];
+
+export const productSearchableFields = ['name','category'];
