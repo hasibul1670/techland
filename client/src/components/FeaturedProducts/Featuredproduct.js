@@ -1,4 +1,4 @@
-import FeaturedProductCard from "../cardComponents/FeaturedProductCard";
+import HomePageFeaturedCard from "../cardComponents/HomePageFeaturedCard";
 
 
 
@@ -11,10 +11,10 @@ const Featuredproduct = ({ allProducts }) => {
       <div className="flex justify-center  container mx-auto mb-5    px-4">
         <div className="grid  mt-4 md:grid-cols-2 lg:grid-cols-3  gap-5">
           {allProducts.slice(0, 7)?.map((product) => (
-            <FeaturedProductCard
+            <HomePageFeaturedCard
               key={product?._id}
               product={product}
-            ></FeaturedProductCard>
+            ></HomePageFeaturedCard>
           ))}
         </div>
       </div>

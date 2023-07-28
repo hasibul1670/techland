@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const FeaturedProductCard = ({ product,handleSelectCpu }) => {
+const HomePageFeaturedCard = ({ product }) => {
 
   return (
     <div className="p-7">
@@ -31,13 +31,11 @@ const FeaturedProductCard = ({ product,handleSelectCpu }) => {
         <p className=" text-cyan-700 font-bold ">
           Rating:{product?.averageRating}
         </p>
-     
-          <button 
-          onClick={() => handleSelectCpu(product?._id)}
-          className="btn  btn-primary capitalize  btn-sm">
-            Add to Pc Building
+        <Link href={`/products/${product?._id}`}>
+          <button className="btn  btn-primary capitalize  btn-sm">
+            Show Detail
           </button>
-      
+        </Link>
       </div>
     </div>
     </div>
@@ -45,4 +43,4 @@ const FeaturedProductCard = ({ product,handleSelectCpu }) => {
   );
 };
 
-export default FeaturedProductCard;
+export default HomePageFeaturedCard;
