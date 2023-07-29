@@ -16,6 +16,7 @@ import PCBuldingComponent from "../components/PCBuldingComponent/PCBuldingCompon
 import MainLayout from "../layouts/mainLayout";
 
 import { calculateTotalCost } from "../redux/pcBuilder/pcBuilderSlice";
+import { toast } from "react-hot-toast";
 
 const PcBuilding = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const PcBuilding = () => {
     router.push({
       pathname: `/category/${category}`,
     });
+  
   };
   const pcBuilding = useSelector((state) => state.pcBuilder.pcBuilding);
   useSelector((state) => state.pcBuilder.totalCost, calculateTotalCost);
@@ -131,11 +133,14 @@ const PcBuilding = () => {
             }
             BsCpu={componentType.icon}
           />
-          <div className="divider"></div>
+          <div className="divider"></div> <div className="divider"></div>
         </div>
       ))}
 
-<div className="flex mr-5 justify-end text-sm mb-3 font-bold text-pink-700">Total Cost: ${pcBuilding.reduce((sum, component) => sum + component.price, 0)}</div>
+      <div className="flex mr-5 justify-end text-sm mb-3 font-bold text-pink-700">
+        Total Cost: $
+        {pcBuilding.reduce((sum, component) => sum + component.price, 0)}
+      </div>
       <div className=" flex justify-center ">
         <button
           className="btn btn-primary btn-sm"
@@ -143,9 +148,6 @@ const PcBuilding = () => {
         >
           Complete Build
         </button>
-
-
-
       </div>
     </div>
   );

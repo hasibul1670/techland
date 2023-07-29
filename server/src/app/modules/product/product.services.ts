@@ -15,16 +15,12 @@ const getAllProducts = async (filters: IProductFilters) => {
 };
 
 const getSingleProduct = async (id: string) => {
-  const result = await Product.find({ id: id })
-    .populate('instructor')
-    .populate('review')
-    .populate('lessons');
-
-  return result;
+  const result = await Product.findOne({_id: id });
+    return result
 };
 
 const deleteProduct = async (id: string) => {
-  const result = await Product.findOneAndDelete({ id: id });
+  const result = await Product.findOneAndDelete({ _id: id });
   return result;
 };
 const updateProduct = async (

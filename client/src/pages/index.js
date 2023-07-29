@@ -1,9 +1,8 @@
 import Head from "next/head";
+import Banner from "../components/Banner";
 import FeatureCategory from "../components/FeaturedProducts/FeatureCategory";
 import Featuredproduct from "../components/FeaturedProducts/Featuredproduct";
 import MainLayout from "../layouts/mainLayout";
-
-
 
 export default function Home({ products }) {
   const allProducts = products?.data;
@@ -18,10 +17,10 @@ export default function Home({ products }) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <Banner />
       <Featuredproduct allProducts={allProducts} />
-    
-      <FeatureCategory/>
 
+      <FeatureCategory />
     </>
   );
 }
@@ -39,13 +38,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-// export const getServerSideProps = async () => {
-//   const res = await fetch("https://cow-hut-ten.vercel.app/api/v1/cows");
-//   const data = await res.json();
-//   return {
-//     props: {
-//       allProducts: data,
-//     },
-//   };
-// };

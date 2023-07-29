@@ -5,19 +5,14 @@ import FeaturedProductCard from '../../components/cardComponents/FeaturedProduct
 import MainLayout from '../../layouts/mainLayout';
 import { addToPcBuilding } from '../../redux/pcBuilder/pcBuilderSlice';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import useAddComponentToPCBuilding, { handleSelectedComponent } from '../../components/handleSelectedComponent';
 
 const CpuCategoryPage = ({products}) => {
 
   const allProducts = products;
-    const router = useRouter();
-    const dispatch = useDispatch();
-  const handleSelectCPU = (componentName,price,category) => {
-    dispatch (addToPcBuilding({ componentName, price,category }));
-    router.push({
-      pathname: "/pc-building",
-    });
-  };
-
+  
+  const handleSelectedComponent = useAddComponentToPCBuilding();
   
   return (
     <div className="py-20">
@@ -28,7 +23,7 @@ const CpuCategoryPage = ({products}) => {
         <div className="grid  mt-4 md:grid-cols-2 lg:grid-cols-3  gap-5">
           {allProducts?.map((product) => (
             <FeaturedProductCard
-            handleSelectedComponent={handleSelectCPU}
+            handleSelectedComponent={handleSelectedComponent}
               key={product?._id}
               product={product}
             ></FeaturedProductCard>

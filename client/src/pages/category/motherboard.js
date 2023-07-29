@@ -1,29 +1,16 @@
+import React from "react";
+import FeaturedProductCard from "../../components/cardComponents/FeaturedProductCard";
+import useAddComponentToPCBuilding from "../../components/handleSelectedComponent";
+import MainLayout from "../../layouts/mainLayout";
 
-import React from 'react';
-import FeaturedProductCard from '../../components/cardComponents/FeaturedProductCard';
-import MainLayout from '../../layouts/mainLayout';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { addToPcBuilding } from '../../redux/pcBuilder/pcBuilderSlice';
-
-const MotherboardPage = ({products})=> {
+const MotherboardPage = ({ products }) => {
   const allProducts = products;
-  const router = useRouter();
-  const dispatch = useDispatch();
-const handleSelectedComponent = (componentName,price,category) => {
-  dispatch (addToPcBuilding({ componentName, price,category }));
-  router.push({
-    pathname: "/pc-building",
-  });
-};
+  const handleSelectedComponent = useAddComponentToPCBuilding();
 
-
-  
   return (
     <div className="py-20">
       <h1 className="flex justify-center text-xl text-cyan-400 font-bold">
-
-MotherBoard
+        MotherBoard
       </h1>
       <div className="flex justify-center  container mx-auto mb-5    px-4">
         <div className="grid  mt-4 md:grid-cols-2 lg:grid-cols-3  gap-5">
@@ -36,15 +23,11 @@ MotherBoard
           ))}
         </div>
       </div>
-
-
     </div>
   );
 };
 
-
 export default MotherboardPage;
-
 
 MotherboardPage.getLayout = function getLayout(page) {
   return <MainLayout>{page}</MainLayout>;
@@ -53,7 +36,9 @@ MotherboardPage.getLayout = function getLayout(page) {
 export async function getStaticProps() {
   const res = await fetch("http://localhost:4000/api/v1/products");
   const products = await res.json();
-  const cpuProducts = products?.data?.filter((product) => product.category === 'Motherboard');
+  const cpuProducts = products?.data?.filter(
+    (product) => product.category === "Motherboard"
+  );
   return {
     props: {
       products: cpuProducts,
