@@ -14,6 +14,7 @@
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "fuse.js": "^6.6.2",
+    "js-cookie": "^3.0.5",
     "lottie-react": "^2.4.0",
     "next": "13.4.12",
     "postcss": "8.4.27",

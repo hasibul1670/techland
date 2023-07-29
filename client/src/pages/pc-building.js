@@ -1,7 +1,8 @@
-import React from "react";
-
+'use client'
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 import {
   BsCpu,
@@ -15,19 +16,28 @@ import { GiGreenPower } from "react-icons/gi";
 import PCBuldingComponent from "../components/PCBuldingComponent/PCBuldingComponent";
 import MainLayout from "../layouts/mainLayout";
 
-import { calculateTotalCost } from "../redux/pcBuilder/pcBuilderSlice";
-import { toast } from "react-hot-toast";
+import {
+  addToPcBuilding,
+  calculateTotalCost,
+} from "../redux/pcBuilder/pcBuilderSlice";
 
 const PcBuilding = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const handleChooseComponent = (category) => {
     router.push({
       pathname: `/category/${category}`,
     });
-  
   };
   const pcBuilding = useSelector((state) => state.pcBuilder.pcBuilding);
   useSelector((state) => state.pcBuilder.totalCost, calculateTotalCost);
+
+  // !
+
+
+  
+
+  ////!
 
   const componentTypes = [
     {
@@ -115,6 +125,32 @@ const PcBuilding = () => {
         componentType.componentName !== "" && componentType.price !== 0
     );
   };
+  const handleCompleteBuild = () => {
+    Swal.fire({
+      position: "top-middle",
+      icon: "success",
+      title: "Your Build is Completed !!! ",
+      showConfirmButton: false,
+      timer: 2500,
+    });
+    router.push({
+      pathname: "/pc-making",
+    });
+  };
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("pcBuildingData");
+    if (storedData) {
+      dispatch(addToPcBuilding(JSON.parse(storedData)));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (pcBuilding !== componentTypes) {
+      localStorage.setItem("pcBuildingData", JSON.stringify(pcBuilding));
+    }
+  }, [pcBuilding]);
+
 
   return (
     <div className="py-20 p-10">
@@ -145,6 +181,7 @@ const PcBuilding = () => {
         <button
           className="btn btn-primary btn-sm"
           disabled={!areAllComponentsChosen()}
+          onClick={handleCompleteBuild}
         >
           Complete Build
         </button>

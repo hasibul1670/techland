@@ -18,15 +18,7 @@ const ProductDetailPage = ({ product }) => {
     price,
   } = product?.data;
 
-  const handleBuyNow = () => {
-    Swal.fire({
-      position: "top-middle",
-      icon: "success",
-      title: "Your Order has been Placed",
-      showConfirmButton: false,
-      timer: 2500,
-    });
-  };
+ 
 
   const router = useRouter();
   const dispatch = useDispatch();
