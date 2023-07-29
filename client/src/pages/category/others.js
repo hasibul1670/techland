@@ -3,9 +3,21 @@
 import React from 'react';
 import MainLayout from '../../layouts/mainLayout';
 import FeaturedProductCard from '../../components/cardComponents/FeaturedProductCard';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { addToPcBuilding } from '../../redux/pcBuilder/pcBuilderSlice';
 
 const OthersPage = ({products}) => {
     const allProducts = products;
+    const router = useRouter();
+    const dispatch = useDispatch();
+  const handleSelectedComponent = (componentName,price,category) => {
+    dispatch (addToPcBuilding({ componentName, price,category }));
+    router.push({
+      pathname: "/pc-building",
+    });
+  };
+  
   return (
       <div className="py-20">
       <h1 className="flex justify-center text-xl text-cyan-400 font-bold">
@@ -17,6 +29,7 @@ const OthersPage = ({products}) => {
             <FeaturedProductCard
               key={product?._id}
               product={product}
+              handleSelectedComponent={handleSelectedComponent}
             ></FeaturedProductCard>
           ))}
         </div>

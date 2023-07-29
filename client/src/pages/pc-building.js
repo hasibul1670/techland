@@ -3,7 +3,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-
 import {
   BsCpu,
   BsDeviceSsd,
@@ -16,69 +15,71 @@ import { GiGreenPower } from "react-icons/gi";
 import PCBuldingComponent from "../components/PCBuldingComponent/PCBuldingComponent";
 import MainLayout from "../layouts/mainLayout";
 
+import { calculateTotalCost } from "../redux/pcBuilder/pcBuilderSlice";
 
 const PcBuilding = () => {
   const router = useRouter();
-
-  const selectedComponent = useSelector((state) => state.pcBuilder.selectedComponent);
-  const selectedComponents = useSelector((state) => state.pcBuilder.selectedComponents);
   const handleChooseComponent = (category) => {
     router.push({
       pathname: `/category/${category}`,
     });
   };
   const pcBuilding = useSelector((state) => state.pcBuilder.pcBuilding);
- 
-
-
-
+  useSelector((state) => state.pcBuilder.totalCost, calculateTotalCost);
 
   const componentTypes = [
-    { name: "cpu",
-    componentName:'',
-    price:0,
-    category:'CPU',
-    icon: BsCpu, Title: "Processor", demoText: "Select a processor" },
+    {
+      name: "cpu",
+      componentName: "",
+      price: 0,
+      category: "CPU",
+      icon: BsCpu,
+      Title: "Processor",
+      demoText: "Select a processor",
+    },
     {
       name: "motherboard",
       icon: BsMotherboard,
-      componentName:'',
-      category:'MotherBoard',
-      price:0,
+      componentName: "",
+      category: "Motherboard",
+      price: 0,
       Title: "Motherboard",
       demoText: "Select motherboard",
-
     },
 
-    { name: "ram", icon: BsMemory, Title: "RAM",
-category:'RAM',
-componentName:'',
-price:0,
-    demoText: "Select Ram" },
+    {
+      name: "ram",
+      icon: BsMemory,
+      Title: "RAM",
+      category: "RAM",
+      componentName: "",
+      price: 0,
+      demoText: "Select Ram",
+    },
     {
       name: "monitor",
-      price:0,
-      category:'Monitor',
+      price: 0,
+      category: "Monitor",
       icon: FiMonitor,
-      componentName:'',
+      componentName: "",
       Title: "Monitor",
       demoText: "Select Monitor",
     },
     {
       name: "storage",
       icon: BsDeviceSsd,
-      price:0,
-      category:'Storege Device',
+      price: 0,
+      category: "Storage Device",
       Title: "Storage Devices",
-      componentName:'',
+      componentName: "",
       demoText: "Select Storage",
     },
     {
       name: "psu",
       icon: GiGreenPower,
-      category:'Power Supply Unit',
-      componentName:'',
-      price:0,
+      category: "Power Supply Unit",
+      componentName: "",
+      price: 0,
       Title: "Power Supply Unit",
       demoText: "Select a PSU",
     },
@@ -86,18 +87,19 @@ price:0,
       name: "others",
       icon: BsKeyboard,
       Title: "Others",
-      componentName:'',
-      category:'Others',
-      price:0,
+      componentName: "",
+      category: "Others",
+      price: 0,
       demoText: "Select others Components",
     },
   ];
 
- 
   pcBuilding.forEach((component) => {
-    const { componentName, price,category } = component;
+    const { componentName, price, category } = component;
 
-    const componentType = componentTypes.find((type) => type.category === category);
+    const componentType = componentTypes.find(
+      (type) => type.category === category
+    );
 
     if (componentType) {
       componentType.componentName = componentName;
@@ -105,9 +107,12 @@ price:0,
     }
   });
 
-
-
-
+  const areAllComponentsChosen = () => {
+    return componentTypes.every(
+      (componentType) =>
+        componentType.componentName !== "" && componentType.price !== 0
+    );
+  };
 
   return (
     <div className="py-20 p-10">
@@ -118,19 +123,29 @@ price:0,
       {componentTypes.map((componentType) => (
         <div key={componentType.name}>
           <PCBuldingComponent
-         
             componentType={componentType}
             title={componentType.Title}
             demoText={componentType.demoText}
-            handleChooseComponent={() => handleChooseComponent(componentType.name)}
+            handleChooseComponent={() =>
+              handleChooseComponent(componentType.name)
+            }
             BsCpu={componentType.icon}
           />
           <div className="divider"></div>
         </div>
       ))}
 
+<div className="flex mr-5 justify-end text-sm mb-3 font-bold text-pink-700">Total Cost: ${pcBuilding.reduce((sum, component) => sum + component.price, 0)}</div>
       <div className=" flex justify-center ">
-        <button className="btn btn-primary btn-sm">Complete Build </button>
+        <button
+          className="btn btn-primary btn-sm"
+          disabled={!areAllComponentsChosen()}
+        >
+          Complete Build
+        </button>
+
+
+
       </div>
     </div>
   );
@@ -141,5 +156,3 @@ export default PcBuilding;
 PcBuilding.getLayout = function getLayout(page) {
   return <MainLayout>{page}</MainLayout>;
 };
-
-

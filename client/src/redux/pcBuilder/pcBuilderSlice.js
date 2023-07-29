@@ -7,9 +7,10 @@ const pcBuilderSlice = createSlice({
     selectedComponent: null,
     selectedComponents: {},
     componentDetails: {
-      cpu: { name: "CPU", price: 0,category:''},
+      cpu: { name: "CPU", price: 0, category: "" },
     },
-    pcBuilding: [], // Initialize pcBuilding as an empty array
+    pcBuilding: [],
+    totalCost: 0,
   },
   reducers: {
     setSelectedComponent(state, action) {
@@ -20,13 +21,30 @@ const pcBuilderSlice = createSlice({
       state.selectedComponents[category] = componentName;
     },
     addToPcBuilding(state, action) {
-      const { componentName, price,category } = action.payload;
-      state.pcBuilding.push({ componentName, price,category });
+      const { componentName, price, category } = action.payload;
+      state.pcBuilding.push({ componentName, price, category });
     },
-    // ... other reducers ...
+    calculateTotalCost(state) {
+      let totalCost = 0;
+      state.pcBuilding.forEach((component) => {
+        totalCost += component.price;
+      });
+      state.totalCost = totalCost;
+    },
+    calculateTotalCost(state) {
+      let totalCost = 0;
+      state.pcBuilding.forEach((component) => {
+        totalCost += component.price;
+      });
+      state.totalCost = totalCost;
+    },
   },
 });
 
-export const { setSelectedComponent, setSelectedComponents, addToPcBuilding } =
-  pcBuilderSlice.actions;
+export const {
+  setSelectedComponent,
+  setSelectedComponents,
+  addToPcBuilding,
+  calculateTotalCost,
+} = pcBuilderSlice.actions;
 export default pcBuilderSlice.reducer;

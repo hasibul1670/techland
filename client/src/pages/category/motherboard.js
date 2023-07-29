@@ -2,9 +2,22 @@
 import React from 'react';
 import FeaturedProductCard from '../../components/cardComponents/FeaturedProductCard';
 import MainLayout from '../../layouts/mainLayout';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { addToPcBuilding } from '../../redux/pcBuilder/pcBuilderSlice';
 
 const MotherboardPage = ({products})=> {
   const allProducts = products;
+  const router = useRouter();
+  const dispatch = useDispatch();
+const handleSelectedComponent = (componentName,price,category) => {
+  dispatch (addToPcBuilding({ componentName, price,category }));
+  router.push({
+    pathname: "/pc-building",
+  });
+};
+
+
   
   return (
     <div className="py-20">
@@ -18,6 +31,7 @@ MotherBoard
             <FeaturedProductCard
               key={product?._id}
               product={product}
+              handleSelectedComponent={handleSelectedComponent}
             ></FeaturedProductCard>
           ))}
         </div>

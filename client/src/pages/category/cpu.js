@@ -11,20 +11,12 @@ const CpuCategoryPage = ({products}) => {
   const allProducts = products;
     const router = useRouter();
     const dispatch = useDispatch();
-
-
-
   const handleSelectCPU = (componentName,price,category) => {
     dispatch (addToPcBuilding({ componentName, price,category }));
     router.push({
       pathname: "/pc-building",
     });
   };
-
-
-
-
-
 
   
   return (

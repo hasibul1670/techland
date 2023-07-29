@@ -2,18 +2,22 @@ import React from "react";
 import { useRouter } from 'next/router';
 import MainLayout from "../../layouts/mainLayout";
 import FeaturedProductCard from "../../components/cardComponents/FeaturedProductCard";
+import { useDispatch } from "react-redux";
+import { addToPcBuilding } from "../../redux/pcBuilder/pcBuilderSlice";
 
 
 const MonitorPage =  ({products})=> {
   const allProducts = products;
 
   const router = useRouter();
-  const handleSelectMonitor = (monitor,price) => {
-    router.push({
-      pathname: "/pc-building",
-      query: { name: monitor, price: price },
-    });
-  };
+  const dispatch = useDispatch();
+const handleSelectedComponent = (componentName,price,category) => {
+  dispatch (addToPcBuilding({ componentName, price,category }));
+  router.push({
+    pathname: "/pc-building",
+  });
+};
+
 
 
 
@@ -27,7 +31,7 @@ const MonitorPage =  ({products})=> {
         <div className="grid  mt-4 md:grid-cols-2 lg:grid-cols-3  gap-5">
           {allProducts?.map((product) => (
             <FeaturedProductCard
-            handleSelectedComponent={handleSelectMonitor}
+            handleSelectedComponent={handleSelectedComponent}
               key={product?._id}
               product={product}
             ></FeaturedProductCard>
