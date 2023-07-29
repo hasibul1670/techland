@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const FeaturedProductCard = ({ product,handleSelectCpu }) => {
+const FeaturedProductCard = ({ product,handleSelectedComponent }) => {
+
+  
 
   return (
     <div className="p-7">
@@ -33,7 +35,7 @@ const FeaturedProductCard = ({ product,handleSelectCpu }) => {
         </p>
      
           <button 
-          onClick={() => handleSelectCpu(product?._id)}
+          onClick={() => handleSelectedComponent(product?.productName, product?.price,product?.category )}
           className="btn  btn-primary capitalize  btn-sm">
             Add to Pc Building
           </button>

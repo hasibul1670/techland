@@ -3,10 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api/apiSlice";
 
 import productSlice from "./product/productSlice";
+import pcBuilderReducer from "./pcBuilder/pcBuilderSlice";
 
 const store = configureStore({
   reducer: {
     product: productSlice,
+    pcBuilder: pcBuilderReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -1,30 +1,32 @@
-
+import { useRouter } from 'next/router';
 
 import React from 'react';
 import FeaturedProductCard from '../../components/cardComponents/FeaturedProductCard';
 import MainLayout from '../../layouts/mainLayout';
+import { addToPcBuilding } from '../../redux/pcBuilder/pcBuilderSlice';
+import { useDispatch } from 'react-redux';
 
 const CpuCategoryPage = ({products}) => {
 
   const allProducts = products;
-
-  const CPUPage = () => {
-    const [selectedCpu, setSelectedCpu] = useState('');
     const router = useRouter();
-  
-    const handleSelectCpu = (cpuName) => {
-      setSelectedCpu(cpuName);
-    };
-  
-    const handleGoBack = () => {
-      router.back(); // Go back to the previous page without adding the CPU to the selected list
-    };
-  
-    const handleAddCpu = () => {
-      // Do any additional logic or API calls here to save the selected CPU, if needed.
-      router.back(); // Go back to the previous page after adding the CPU to the selected list
-    };
+    const dispatch = useDispatch();
 
+
+
+  const handleSelectCPU = (componentName,price,category) => {
+    dispatch (addToPcBuilding({ componentName, price,category }));
+    router.push({
+      pathname: "/pc-building",
+    });
+  };
+
+
+
+
+
+
+  
   return (
     <div className="py-20">
       <h1 className="flex justify-center text-xl text-cyan-400 font-bold">
@@ -34,7 +36,7 @@ const CpuCategoryPage = ({products}) => {
         <div className="grid  mt-4 md:grid-cols-2 lg:grid-cols-3  gap-5">
           {allProducts?.map((product) => (
             <FeaturedProductCard
-            handleSelectCpu={handleSelectCpu}
+            handleSelectedComponent={handleSelectCPU}
               key={product?._id}
               product={product}
             ></FeaturedProductCard>
