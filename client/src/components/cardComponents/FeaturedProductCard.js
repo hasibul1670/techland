@@ -39,6 +39,11 @@ const FeaturedProductCard = ({ product,handleSelectedComponent }) => {
           className="btn  btn-primary capitalize  btn-sm">
             Add to Pc Building
           </button>
+          <Link href={`/products/${product?._id}`}>
+          <button className="btn  btn-info capitalize  btn-xs">
+            Show Detail
+          </button>
+        </Link>
       
       </div>
     </div>

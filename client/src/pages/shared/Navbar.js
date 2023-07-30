@@ -1,9 +1,9 @@
-import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
-
 const NavBar = () => {
+  const { data: session } = useSession();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -15,21 +15,13 @@ const NavBar = () => {
           Home
         </Link>
       </li>
-      <li className="nav-link nav-link-ltr">
-        <Link href="/products" className="text-white">
-          products
-        </Link>
-      </li>
-
-
+ 
 
       <li>
         <details>
-          <summary  className="text-white">
-          Categories
-          </summary>
+          <summary className="text-white">Categories</summary>
           <ul className="p-2 bg-base-100">
-          <li>
+            <li>
               <Link href="/category/cpu">CPU / Processor</Link>
             </li>
             <li>
@@ -53,12 +45,6 @@ const NavBar = () => {
           </ul>
         </details>
       </li>
-
-
-    
-
-
-   
     </>
   );
 
@@ -121,9 +107,7 @@ const NavBar = () => {
         </div>
 
         <Link href="/" className="btn btn-ghost normal-case text-white text-xl">
-         
-<h3>TECHLAND</h3>
-
+          <h3>TECHLAND</h3>
         </Link>
       </div>
 
@@ -132,14 +116,31 @@ const NavBar = () => {
       </div>
 
       <div className="navbar-end">
-        <Link href="/pc-building">
-          {" "}
-          <button className="btn mr-2 btn-sm btn-primary">PC Builder </button>
-        </Link>
-        <Link href="/login">
-          {" "}
-          <button className="btn btn-sm btn-primary">Sign In</button>
-        </Link>
+        {session?.user ? (
+          <>
+            <Link href="/pc-building">
+              {" "}
+              <button className="btn mr-2 btn-sm btn-info">
+                PC Builder{" "}
+              </button>
+            </Link>
+
+            <Link href="/">
+              {" "}
+              <button
+                onClick={() => signOut()}
+                className="btn capitalize btn-sm btn-primary"
+              >
+                Logout
+              </button>
+            </Link>
+          </>
+        ) : (
+          <Link href="/login">
+            {" "}
+            <button className="btn capitalize btn-sm btn-primary">Login In</button>
+          </Link>
+        )}
       </div>
     </div>
   );
