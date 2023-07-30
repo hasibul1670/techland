@@ -24,7 +24,7 @@ const LoginPage = () => {
             className="p-2 rounded-full bg-pink-900 text-white"
             onClick={() =>
               signIn("google", {
-                callbackUrl: "http://localhost:3000/",
+                callbackUrl: "https://client-azure-alpha.vercel.app/",
               })
             }
           >
@@ -37,7 +37,7 @@ const LoginPage = () => {
             className="p-2 rounded-full bg-gray-800 text-white"
             onClick={() =>
               signIn("github", {
-                callbackUrl: "http://localhost:3000/",
+                callbackUrl: "https://client-azure-alpha.vercel.app/",
               })
             }
           >
