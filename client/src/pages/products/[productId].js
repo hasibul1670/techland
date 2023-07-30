@@ -131,7 +131,7 @@ ProductDetailPage.getLayout = function getLayout(page) {
 export const getServerSideProps = async (context) => {
   const { params } = context;
   const res = await fetch(
-    `http://localhost:4000/api/v1/products/${params.productId}`
+    `https://server-nu-teal.vercel.app/api/v1/products/${params.productId}`
   );
   const data = await res.json();
   return {

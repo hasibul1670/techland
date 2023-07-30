@@ -32,7 +32,7 @@ PsuPage.getLayout = function getLayout(page) {
 };
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:4000/api/v1/products");
+  const res = await fetch("https://server-nu-teal.vercel.app/api/v1/products");
   const products = await res.json();
   const cpuProducts = products?.data?.filter(
     (product) => product.category === "Power Supply Unit"
