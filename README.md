@@ -1,9 +1,8 @@
 # techland
 
-# Product-Details-Application
+# A PC-Builder Application
 
-#### "Welcome to our online shopping platform, where we offer a seamless and delightful shopping experience. Explore our vast product showcase featuring a wide range of items, from electronics to clothing and home decor. Easily find what you're looking for using our powerful search functionality, and filter products by price to discover the best deals within your budget. Additionally, our intuitive category filter allows you to browse products based on your interests. Each product comes with its own dedicated page, providing in-depth details and customer reviews. Enjoy a convenient and secure shopping experience with us!"
-
+#### PC Builder is an application that allows users to easily customize and build their own personal computers. It provides an intuitive interface for selecting components and helps users create a fully functional and compatible system based on their needs and preferences.
 
 ### Git Commit Messages
 
@@ -21,15 +20,18 @@
 - build: BuildSystem Updates
 - revert: Reverting Changes
 
+## Features
 
-### Features
+- **Component Selection:** PC Builder offers a wide range of components such as CPUs, GPUs, motherboards, RAM, storage drives, power supplies, and cases for users to choose from.
+- **Compatibility Checking:** The application ensures that selected components are compatible with each other, preventing any potential issues during assembly.
+- **Price Comparison:** Users can compare prices from various vendors to find the best deals on their chosen components.
+- **Saved Builds:** PC Builder allows users to save their configurations for future reference or modifications.
+- **Export Configuration:** Users can export their build configurations to share with others or save for later use.
+- **User Accounts:** Optional user accounts for saving configurations, accessing build history, and syncing across devices.
+- **Community and Reviews:** Users can browse and contribute to a community-driven database of user reviews and recommendations for components.
+- **System Requirements:** Provides an estimation of system performance, power consumption, and heat generation based on selected components.
 
-- Product Showcase
-- Individual Product Show
-- Search Functionality
-- Filter product by Price
-- Filter Product as Category
-
+## Installation
 
 ### Technologies Used
 
@@ -38,10 +40,12 @@
 - Database: MongoDB
 - Deployment: Vercel
 
-
-
   ### Email: hasibulislam1670@gmail.com
-  ### Website: https://product-details007.vercel.app/
-  ### GitHub: https://github.com/hasibul1670
 
+  ### Website:https://client-azure-alpha.vercel.app
 
+  ### GitHub: https://github.com/hasibul1670/techland
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
