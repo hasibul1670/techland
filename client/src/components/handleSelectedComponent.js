@@ -10,6 +10,19 @@ const useAddComponentToPCBuilding = () => {
 
   const handleSelectedComponent = (componentName, price, category) => {
     dispatch(addToPcBuilding({ componentName, price, category }));
+
+
+ const existingDataString = localStorage.getItem("selectedComponents");
+  const existingData = existingDataString ? JSON.parse(existingDataString) : {};
+
+    existingData[category] = existingData[category] || [];
+    existingData[category].push({ componentName, price });
+
+
+    localStorage.setItem("selectedComponents", JSON.stringify(existingData));
+
+
+
     router.push({
       pathname: "/pc-building",
     });

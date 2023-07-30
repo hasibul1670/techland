@@ -1,6 +1,5 @@
-'use client'
 import { useRouter } from "next/router";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -18,7 +17,7 @@ import MainLayout from "../layouts/mainLayout";
 
 import {
   addToPcBuilding,
-  calculateTotalCost,
+  calculateTotalCost
 } from "../redux/pcBuilder/pcBuilderSlice";
 
 const PcBuilding = () => {
@@ -31,13 +30,6 @@ const PcBuilding = () => {
   };
   const pcBuilding = useSelector((state) => state.pcBuilder.pcBuilding);
   useSelector((state) => state.pcBuilder.totalCost, calculateTotalCost);
-
-  // !
-
-
-  
-
-  ////!
 
   const componentTypes = [
     {
@@ -119,6 +111,20 @@ const PcBuilding = () => {
     }
   });
 
+
+  useEffect(() => {
+
+    const existingDataString = localStorage.getItem("selectedComponents");
+    if (existingDataString) {
+      const existingData = JSON.parse(existingDataString);
+      Object.keys(existingData).forEach((category) => {
+        existingData[category].forEach((component) => {
+          const { componentName, price } = component;
+          dispatch(addToPcBuilding({ componentName, price, category }));
+        });
+      });
+    }
+  }, [dispatch]);
   const areAllComponentsChosen = () => {
     return componentTypes.every(
       (componentType) =>
@@ -137,19 +143,6 @@ const PcBuilding = () => {
       pathname: "/pc-making",
     });
   };
-
-  useEffect(() => {
-    const storedData = localStorage.getItem("pcBuildingData");
-    if (storedData) {
-      dispatch(addToPcBuilding(JSON.parse(storedData)));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (pcBuilding !== componentTypes) {
-      localStorage.setItem("pcBuildingData", JSON.stringify(pcBuilding));
-    }
-  }, [pcBuilding]);
 
 
   return (

@@ -14,6 +14,7 @@ const CpuCategoryPage = ({products}) => {
   
   const handleSelectedComponent = useAddComponentToPCBuilding();
   
+  
   return (
     <div className="py-20">
       <h1 className="flex justify-center text-xl text-cyan-400 font-bold">
