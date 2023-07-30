@@ -1,11 +1,7 @@
-import { useRouter } from "next/router";
 import React from "react";
-import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import FeaturedProductCard from "../../components/cardComponents/FeaturedProductCard";
-import MainLayout from "../../layouts/mainLayout";
-import { addToPcBuilding } from "../../redux/pcBuilder/pcBuilderSlice";
 import useAddComponentToPCBuilding from "../../components/handleSelectedComponent";
+import MainLayout from "../../layouts/mainLayout";
 
 const MonitorPage = ({ products }) => {
   const allProducts = products;
@@ -38,7 +34,9 @@ MonitorPage.getLayout = function getLayout(page) {
 };
 
 export async function getStaticProps() {
-  const res = await fetch("https://server-nu-teal.vercel.app/api/v1/products");
+  const res = await fetch(
+    "https://server-7ffzzw8lv-hasibul1670.vercel.app/api/v1/products"
+  );
   const products = await res.json();
   const cpuProducts = products?.data?.filter(
     (product) => product.category === "Monitor"

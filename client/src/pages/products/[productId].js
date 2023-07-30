@@ -1,8 +1,7 @@
 import Image from "next/image";
-import Swal from "sweetalert2";
-import MainLayout from "../../layouts/mainLayout";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import MainLayout from "../../layouts/mainLayout";
 import { addToPcBuilding } from "../../redux/pcBuilder/pcBuilderSlice";
 const ProductDetailPage = ({ product }) => {
   const {
@@ -18,19 +17,15 @@ const ProductDetailPage = ({ product }) => {
     price,
   } = product?.data;
 
- 
-
   const router = useRouter();
   const dispatch = useDispatch();
-  
-const handleSelectedComponent = (componentName,price,category) => {
-  dispatch (addToPcBuilding({ componentName, price,category }));
-  router.push({
-    pathname: "/pc-building",
 
-  });
-};
-
+  const handleSelectedComponent = (componentName, price, category) => {
+    dispatch(addToPcBuilding({ componentName, price, category }));
+    router.push({
+      pathname: "/pc-building",
+    });
+  };
 
   return (
     <div className="py-20">
@@ -46,14 +41,16 @@ const handleSelectedComponent = (componentName,price,category) => {
           />
           <div>
             <div className="flex justify-between">
-            <h1 className="text-xl text-cyan-800 font-bold">{productName}</h1>
-            <button 
-          onClick={() => handleSelectedComponent(productName,price,category)}
-          className="btn btn-info capitalize  btn-sm">
-            Add to Pc Building
-          </button>
+              <h1 className="text-xl text-cyan-800 font-bold">{productName}</h1>
+              <button
+                onClick={() =>
+                  handleSelectedComponent(productName, price, category)
+                }
+                className="btn btn-info capitalize  btn-sm"
+              >
+                Add to Pc Building
+              </button>
             </div>
-        
 
             <p className=" text-md font-semibold ">Category : {category}</p>
 
@@ -78,7 +75,10 @@ const handleSelectedComponent = (componentName,price,category) => {
             <div>
               <h1 className="text-red-700 font-semibold">
                 Some Key Features of
-                <span className="text-indigo-700 font-bold	"> {productName}</span>
+                <span className="text-indigo-700 font-bold	">
+                  {" "}
+                  {productName}
+                </span>
               </h1>
 
               <l>
@@ -131,7 +131,7 @@ ProductDetailPage.getLayout = function getLayout(page) {
 export const getServerSideProps = async (context) => {
   const { params } = context;
   const res = await fetch(
-    `https://server-nu-teal.vercel.app/api/v1/products/${params.productId}`
+    `https://server-7ffzzw8lv-hasibul1670.vercel.app/api/v1/products/${params.productId}`
   );
   const data = await res.json();
   return {

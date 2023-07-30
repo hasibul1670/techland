@@ -30,7 +30,9 @@ Home.getLayout = function getLayout(page) {
 };
 
 export async function getStaticProps() {
-  const res = await fetch("https://server-nu-teal.vercel.app/api/v1/products");
+  const res = await fetch(
+    "https://server-7ffzzw8lv-hasibul1670.vercel.app/api/v1/products"
+  );
   const products = await res.json();
   return {
     props: {
