@@ -32,18 +32,7 @@ const LoginPage = () => {
         
             
           </button>
- 
-          <button
-            className="p-2 rounded-full bg-gray-800 text-white"
-            onClick={() =>
-              signIn("github", {
-                callbackUrl: "https://client-azure-alpha.vercel.app/",
-              })
-            }
-          >
-         <span className="text-3xl"><AiFillGithub/></span>
-        
-          </button>
+
         </div>
         <hr className="w-2/3 mb-4" />
         <form

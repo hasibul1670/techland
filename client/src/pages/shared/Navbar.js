@@ -138,7 +138,7 @@ const NavBar = () => {
         ) : (
           <Link href="/login">
             {" "}
-            <button className="btn capitalize btn-sm btn-primary">Login In</button>
+            <button className="btn capitalize btn-sm btn-primary">Log In</button>
           </Link>
         )}
       </div>
